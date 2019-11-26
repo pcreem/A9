@@ -54,6 +54,8 @@ module.exports = {
           opening_hours: '08:00',
           image: faker.image.imageUrl(),
           description: faker.lorem.text(),
+          viewCounts: 0,
+          fovCounts: 0,
           createdAt: new Date(),
           updatedAt: new Date(),
           CategoryId: Math.floor(Math.random() * 5) + 1
@@ -66,8 +68,8 @@ module.exports = {
         ({
           id: i + 1,
           text: faker.lorem.sentence(),
-          userId: Math.floor(Math.random() * 3) + 1,
-          restaurantId: i % 50 + 1,
+          UserId: Math.floor(Math.random() * 3) + 1,
+          RestaurantId: i % 50 + 1,
           createdAt: new Date(),
           updatedAt: new Date()
         })
