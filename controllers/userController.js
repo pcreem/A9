@@ -101,8 +101,13 @@ const userController = {
       UserId: req.user.id,
       RestaurantId: req.params.restaurantId
     })
-      .then((restaurant) => {
-        return res.redirect('back')
+      .then((favorite) => {
+        return Restaurant.findByPk(favorite.RestaurantId)
+          .then(restaurant => {
+            restaurant.fovCounts += 1
+            restaurant.save()
+            return res.redirect('back')
+          })
       })
   },
 
@@ -114,9 +119,14 @@ const userController = {
       }
     })
       .then((favorite) => {
-        favorite.destroy()
-          .then((restaurant) => {
-            return res.redirect('back')
+        return Restaurant.findByPk(favorite.RestaurantId)
+          .then(restaurant => {
+            restaurant.fovCounts -= 1
+            restaurant.save()
+            favorite.destroy()
+              .then((restaurant) => {
+                return res.redirect('back')
+              })
           })
       })
   },
