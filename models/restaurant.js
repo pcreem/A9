@@ -7,11 +7,13 @@ module.exports = (sequelize, DataTypes) => {
     opening_hours: DataTypes.STRING,
     description: DataTypes.TEXT,
     image: DataTypes.STRING,
-    viewCounts: DataTypes.INTEGER
+    viewCounts: DataTypes.INTEGER,
+    fovCounts: DataTypes.INTEGER
   }, {})
   Restaurant.associate = function (models) {
     Restaurant.belongsTo(models.Category)
     Restaurant.hasMany(models.Comment)
+    Restaurant.hasMany(models.Favorite)
     Restaurant.belongsToMany(models.User, {
       through: models.Favorite,
       foreignKey: 'RestaurantId',
